@@ -3,51 +3,51 @@ module S3SwfUpload
     def s3_swf_upload_tag(options = {})
       buttonWidth             = options[:buttonWidth]  || 100
       buttonHeight            = options[:buttonHeight] || 30
-    	flashVersion            = options[:height] || '9.0.0'
-    	queueSizeLimit          = options[:queueSizeLimit] || 100
-    	fileSizeLimit           = options[:fileSizeLimit] || 524288000
+      flashVersion            = options[:height] || '9.0.0'
+      queueSizeLimit          = options[:queueSizeLimit] || 100
+      fileSizeLimit           = options[:fileSizeLimit] || 524288000
       fileTypes               = options[:fileTypes] || '*.*'
       fileTypeDescs           = options[:fileTypeDescs] || 'All Files'
       selectMultipleFiles     = options.has_key?(:selectMultipleFiles) ? options[:selectMultipleFiles] : true
       keyPrefix               = options[:keyPrefix] || ''
-    	signaturePath           = options[:signaturePath] || '/s3_uploads.xml'
-    	buttonUpPath            = options[:buttonUpPath] || '/flash/s3_up_button.gif'
-    	buttonOverPath          = options[:buttonOverPath] || '/flash/s3_over_button.gif'
-    	buttonDownPath          = options[:buttonDownPath] || '/flash/s3_down_button.gif'
-    	                                 
-    	onFileAdd							  = options[:onFileAdd] || false		
-    	onFileRemove						= options[:onFileRemove] || false
-    	onFileSizeLimitReached 	= options[:onFileSizeLimitReached] || false	
-    	onFileNotInQueue				= options[:onFileNotInQueue] || false	
-    	                                 
-    	onQueueChange						= options[:onQueueChange] || false
-    	onQueueClear						= options[:onQueueClear] || false
-    	onQueueSizeLimitReached	= options[:onQueueSizeLimitReached] || false
-    	onQueueEmpty						= options[:onQueueEmpty] || false
-    	                                 
-    	onUploadingStop					= options[:onUploadingStop] || false
-    	onUploadingStart				= options[:onUploadingStart] || false
-    	onUploadingFinish				= options[:onUploadingFinish] || false
-    	                                 
-    	onSignatureOpen					= options[:onSignatureOpen] || false
-    	onSignatureProgress			= options[:onSignatureProgress] || false
-    	onSignatureHttpStatus		= options[:onSignatureHttpStatus] || false
-    	onSignatureComplete			= options[:onSignatureComplete] || false
-    	onSignatureSecurityError= options[:onSignatureSecurityError] || false
-    	onSignatureIOError			= options[:onSignatureIOError] || false
-    	onSignatureXMLError			= options[:onSignatureXMLError] || false
-    	                                 
-    	onUploadOpen						= options[:onUploadOpen] || false
-    	onUploadProgress				= options[:onUploadProgress] || false
-    	onUploadHttpStatus			= options[:onUploadHttpStatus] || false
-    	onUploadComplete				= options[:onUploadComplete] || false
-    	onUploadIOError					= options[:onUploadIOError] || false
-    	onUploadSecurityError		= options[:onUploadSecurityError] || false
-    	onUploadError						= options[:onUploadError] || false
-    	
-      @include_s3_upload ||= false 
+      signaturePath           = options[:signaturePath] || '/s3_uploads.xml'
+      buttonUpPath            = options[:buttonUpPath] || '/flash/s3_up_button.gif'
+      buttonOverPath          = options[:buttonOverPath] || '/flash/s3_over_button.gif'
+      buttonDownPath          = options[:buttonDownPath] || '/flash/s3_down_button.gif'
+
+      onFileAdd               = options[:onFileAdd] || false
+      onFileRemove            = options[:onFileRemove] || false
+      onFileSizeLimitReached  = options[:onFileSizeLimitReached] || false
+      onFileNotInQueue        = options[:onFileNotInQueue] || false
+
+      onQueueChange           = options[:onQueueChange] || false
+      onQueueClear            = options[:onQueueClear] || false
+      onQueueSizeLimitReached = options[:onQueueSizeLimitReached] || false
+      onQueueEmpty            = options[:onQueueEmpty] || false
+
+      onUploadingStop         = options[:onUploadingStop] || false
+      onUploadingStart        = options[:onUploadingStart] || false
+      onUploadingFinish       = options[:onUploadingFinish] || false
+
+      onSignatureOpen         = options[:onSignatureOpen] || false
+      onSignatureProgress     = options[:onSignatureProgress] || false
+      onSignatureHttpStatus   = options[:onSignatureHttpStatus] || false
+      onSignatureComplete     = options[:onSignatureComplete] || false
+      onSignatureSecurityError= options[:onSignatureSecurityError] || false
+      onSignatureIOError      = options[:onSignatureIOError] || false
+      onSignatureXMLError     = options[:onSignatureXMLError] || false
+
+      onUploadOpen            = options[:onUploadOpen] || false
+      onUploadProgress        = options[:onUploadProgress] || false
+      onUploadHttpStatus      = options[:onUploadHttpStatus] || false
+      onUploadComplete        = options[:onUploadComplete] || false
+      onUploadIOError         = options[:onUploadIOError] || false
+      onUploadSecurityError   = options[:onUploadSecurityError] || false
+      onUploadError           = options[:onUploadError] || false
+
+      @include_s3_upload ||= false
       @count ||= 1
-      
+
       out = ''
 
       if !@include_s3_upload
@@ -70,7 +70,7 @@ module S3SwfUpload
       out << "buttonUpPath: '#{buttonUpPath}',\n" if buttonUpPath
       out << "buttonOverPath: '#{buttonOverPath}',\n" if buttonOverPath
       out << "buttonDownPath: '#{buttonDownPath}',\n" if buttonDownPath
-      
+
       out << %(onFileAdd: function(file){
                 #{onFileAdd}
               },) if onFileAdd
@@ -83,7 +83,7 @@ module S3SwfUpload
       out << %(onFileNotInQueue: function(file){
                 #{onFileNotInQueue}
               },) if onFileNotInQueue
-              
+
       out << %(onQueueChange: function(queue){
                 #{onQueueChange}
               },) if onQueueChange
@@ -96,7 +96,7 @@ module S3SwfUpload
       out << %(onQueueClear: function(queue){
                 #{onQueueClear}
               },) if onQueueClear
-              
+
       out << %(onUploadingStart: function(){
                 #{onUploadingStart}
               },) if onUploadingStart
@@ -106,7 +106,7 @@ module S3SwfUpload
       out << %(onUploadingFinish: function(){
                 #{onUploadingFinish}
               },) if onUploadingFinish
-              
+
       out << %(onSignatureOpen: function(file,event){
                 #{onSignatureOpen}
               },) if onSignatureOpen
@@ -128,14 +128,14 @@ module S3SwfUpload
       out << %(onSignatureXMLError: function(file,error_message){
                 #{onSignatureXMLError}
               },) if onSignatureXMLError
-              
+
       out << %(onUploadError: function(upload_options,error){
                 #{onUploadError}
               },) if onUploadError
       out << %(onUploadOpen: function(upload_options,event){
                 #{onUploadOpen}
               },) if onUploadOpen
-      out << %(onUploadProgress: function(upload_options,progress_event){
+      out << %(onUploadProgress: function(upload_options,progress_event,file){
                 #{onUploadProgress}
               },) if onUploadProgress
       out << %(onUploadIOError: function(upload_options,io_error_event){
@@ -147,17 +147,17 @@ module S3SwfUpload
       out << %(onUploadSecurityError: function(upload_options,security_error_event){
                 #{onUploadSecurityError}
               },) if onUploadSecurityError
-      out << %(onUploadComplete: function(upload_options,event){
+      out << %(onUploadComplete: function(upload_options,event,file){
                 #{onUploadComplete}
               },) if onUploadComplete
       # This closes out the object (no comma)
-      out << "foo: 'bar'"              
+      out << "foo: 'bar'"
       out << "});\n"
       out << "</script>\n"
       out << "<div id=\"s3_swf_#{@count}\">\n"
       out << "Please <a href=\"http://www.adobe.com/go/getflashplayer\">Update</a> your Flash Player to Flash v#{flashVersion} or higher...\n"
       out << "</div>\n"
-      
+
       @count += 1
       out
     end

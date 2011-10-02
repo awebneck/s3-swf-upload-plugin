@@ -1,9 +1,9 @@
 package com.elctech {
     public class S3UploadOptions {
-    	/**
+      /**
          * Options specified at:
          * http://docs.amazonwebservices.com/AmazonS3/2006-03-01/HTTPPOSTForms.html
-       	 */
+         */
         public var AWSAccessKeyId:String;
         public var acl:String;
         public var bucket:String;
@@ -20,7 +20,7 @@ package com.elctech {
         public var signature:String;
         public var xamzsecuritytoken:String;
         public var file:String;
-        
+
         /**
          * Addition field
          */
